@@ -4,6 +4,6 @@ A = zeros(1, size_A);
 
 w = sum(codes, 2);
 
-for i = 0 : size_A - 1
-    A(1, i + 1) = sum((i == w));    
+for i = 1 : size_A
+    A(1, i) = sum(((i - 1) == w));    
 end
