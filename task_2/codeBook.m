@@ -9,7 +9,7 @@ codes = zeros(K, n);
 
 for m = 0 : K - 1
    m_xK = de2bi(m*R, n);
-   m_xK = m_xK(end:-1:1); %мл.б на свое место
+   m_xK = m_xK(end:-1:1); %РјР».Р± РЅР° СЃРІРѕРµ РјРµСЃС‚Рѕ
    
    codes(m + 1, :) = xor(m_xK, modGx(m_xK, gX));
 end
