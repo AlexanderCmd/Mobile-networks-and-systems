@@ -10,13 +10,13 @@ Nt = 0;
 PeBit = 0;
 PED = 0;
 
-%     РСЃС‚РѕС‡РЅРёРє
-indexCode = randi([1 K],1,1);%РіРµРЅРµСЂР°С†РёСЏ РёРЅРґРµРєСЃР° РєРѕРґ. СЃР»РѕРІР°
+%     Источник
+indexCode = randi([1 K],1,1);%генерация индекса код. слова
 
 while Ncur < N
     mS = modulSignalBook(indexCode, :);
     
-    %     РђР‘Р“РЁ
+    %     АБГШ
     mR = mS + sigma * randn(1, n);
     
     %     Soft Hamming Decoder
@@ -26,9 +26,9 @@ while Ncur < N
     flagCRC = sum(modGx(mH_, gX));
     flagSum = sum(xor(mH_, codes(indexCode, :)));
     
-    if flagCRC == 0 % РѕС€РёР±РєРё РЅРµС‚ РёР»Рё РЅРµ РѕР±РЅР°СЂСѓР¶РµРЅР°
+    if flagCRC == 0 % ошибки нет или не обнаружена
         PED = PED + (flagSum > 0 & flagCRC == 0);
-        indexCode = randi([1 K],1,1);%РіРµРЅРµСЂР°С†РёСЏ РёРЅРґРµРєСЃР° РєРѕРґ. СЃР»РѕРІР°
+        indexCode = randi([1 K],1,1);%генерация индекса код. слова
         Ncur = Ncur + 1;
     end
     

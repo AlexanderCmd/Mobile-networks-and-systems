@@ -10,30 +10,30 @@ Nt = 0;
 PeBit = 0;
 PED = 0;
 
-%     РСЃС‚РѕС‡РЅРёРє
-indexCode = randi([1 K],1,1);%РіРµРЅРµСЂР°С†РёСЏ РёРЅРґРµРєСЃР° РєРѕРґ. СЃР»РѕРІР°
+%     Источник
+indexCode = randi([1 K],1,1);%генерация индекса код. слова
 
 while Ncur < N
     mS = modulSignalBook(indexCode, :);
     
-    %     РђР‘Р“РЁ
+    %     АБГШ
     mR = mS + sigma * randn(1, n);
     
     %     BPSK ^-1
     mX_ = mR < 0;
     
     %     Hamming Decoder
-    extended_mX_ = [0, 0, mX_]; % РґРѕР±Р°РІР»СЏРµРј РґРІР° Р±РёС‚Р° РІ РЅР°С‡Р°Р»Рѕ
+    extended_mX_ = [0, 0, mX_]; % добавляем два бита в начало
     extended_mH_ = hardHammingDecoder(matrixHammingDec, extended_mX_);
-    mH_ = extended_mH_(3:1:end); % СѓРґР°Р»СЏРµРј РґРІР° Р±РёС‚Р° РІ РЅР°С‡Р°Р»Рµ
+    mH_ = extended_mH_(3:1:end); % удаляем два бита в начале
     
     %     CRC-r ^-1    
     flagCRC = sum(modGx(mH_, gX));
     flagSum = sum(xor(mH_, codes(indexCode, :)));
     
-    if flagCRC == 0 % РѕС€РёР±РєРё РЅРµС‚ РёР»Рё РЅРµ РѕР±РЅР°СЂСѓР¶РµРЅР°
+    if flagCRC == 0 % ошибки нет или не обнаружена
         PED = PED + flagSum > 0;
-        indexCode = randi([1 K], 1, 1);%РіРµРЅРµСЂР°С†РёСЏ РёРЅРґРµРєСЃР° РєРѕРґ. СЃР»РѕРІР°
+        indexCode = randi([1 K], 1, 1);%генерация индекса код. слова
         Ncur = Ncur + 1;
     end
     

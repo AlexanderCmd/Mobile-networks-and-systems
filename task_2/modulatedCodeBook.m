@@ -32,9 +32,9 @@ matrixHammingEnc = [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 
 
 for i = 1 : size
     %     Hamming Encoder
-    extended_mX = [0, 0, codes(i, :)]; % РґРѕР±Р°РІР»СЏРµРј РґРІР° Р±РёС‚Р° РІ РЅР°С‡Р°Р»Рѕ
+    extended_mX = [0, 0, codes(i, :)]; % добавляем два бита в начало
     extended_mH = HammingEncoder(matrixHammingEnc, extended_mX);    
-    mH = extended_mH(3:1:end); % СѓРґР°Р»СЏРµРј РґРІР° Р±РёС‚Р° РІ РЅР°С‡Р°Р»Рµ
+    mH = extended_mH(3:1:end); % удаляем два бита в начале
     
     %     BPSK
     mS = mH.*-2 + 1;

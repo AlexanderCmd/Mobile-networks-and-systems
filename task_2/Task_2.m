@@ -1,8 +1,8 @@
-clc
-clear
-close
+    clc
+clear all
+close all
 
-%                1 2 3 4 5
+%                   1 2 3 4 5
 matrixHammingDec = [1 0 0 0 0; % 1
                     0 1 0 0 0; % 2
                     1 1 0 0 0; % 3
@@ -102,10 +102,7 @@ NoNoiseT = ones(1, length(SNRdB)).*k ./ (n + 5);
 
 figure();
 axis('square');
-hold on
-semilogy(SNRdB, PeBits_hard, 'b.-');
-semilogy(SNRdB, PeBits_soft, 'cx-');
-semilogy(SNRdB, PeBitstheor, 'r-');
+semilogy(SNRdB, PeBits_hard, 'b.-', SNRdB, PeBits_soft, 'cx-', SNRdB, PeBitstheor, 'r-');
 xlabel('SNRdB'); 
 ylabel('PeBit');
 legend ({'Значение вероятности ошибки на бит с использованием помеустойчивого кодирования с жёстким декодером', ...
@@ -115,26 +112,19 @@ legend ({'Значение вероятности ошибки на бит с использованием помеустойчивого ко
 
 figure();
 axis('square');
-hold on
-semilogy(SNRdB, PEDdB_hard, 'b.-');
-semilogy(SNRdB, PEDdB_soft, 'cx-');
-semilogy(SNRdB, PEDsExact, 'r-');
+semilogy(SNRdB, PEDdB_hard, 'b.-', SNRdB, PEDsExact, 'r-');
 xlabel('SNRdB'); 
 ylabel('PED');
 legend({'Значение вероятности ошибки декодера с использованием помеустойчивого кодирования с жёстким декодером', ...
-    'Значение вероятности ошибки декодера с использованием помеустойчивого кодирования с мягким декодером', ...
     'Значение вероятности ошибки декодера без использования помеустойчивого кодирования'},...
 'Location','east')
 
 figure();
 axis('square');
 hold on
-semilogy(SNRdB, TdB_hard, 'b.-');
-semilogy(SNRdB, TdB_soft, 'cx-');
-semilogy(SNRdB, NoNoiseT, 'r-');
+semilogy(SNRdB, TdB_hard, 'b.-', SNRdB, NoNoiseT, 'r-');
 xlabel('SNRdB'); 
 ylabel('T');
 legend ({'Пропускная способность системы с использованием помеустойчивого кодирования с жёстким декодером при шуме', ...
-    'Пропускная способность системы с использованием помеустойчивого кодирования с мягким декодером при шуме', ...
     'Пропускная способность системы с использованием помеустойчивого кодирования без шума'}, ...
 'Location','southwest')
